@@ -1,0 +1,10 @@
+.category-heading {
+    padding: 10px 12px;
+    border-left: 6px solid #000;
+    background-color: #ddd;
+}
+
+.post-heading {
+    font-size: 26px;
+    color: #000;
+}
