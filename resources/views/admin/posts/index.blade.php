@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', '2203048 blog posts')
+@section('title', '2203048 blog articles')
 
 @section('content')
     <div class="container-fluid px-4 mt-4">
@@ -9,8 +9,8 @@
                 <div class="alert alert-success">{{ session('message') }}</div>
             @endif
             <div class="card-header">
-                <h4>View Posts
-                    <a href="{{ url('admin/add-post') }}" class="btn btn-primary float-end">Add Post</a>
+                <h4>View Articles
+                    <a href="{{ url('admin/add-post') }}" class="btn btn-primary float-end">Add Articles</a>
                 </h4>
             </div>
             <div class="card-body">
@@ -19,7 +19,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Category</th>
-                            <th>Post Name</th>
+                            <th>Article Name</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>

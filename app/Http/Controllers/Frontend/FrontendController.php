@@ -25,4 +25,17 @@ class FrontendController extends Controller
         }
         return redirect('/');
     }
+
+    public function viewPost(string $category_id, string $post_slug)
+    {
+        $category = Category::where('id', $category_id)->where('status', '0')->first();
+        if ($category) {
+            $post = Post::where('category_id', $category_id)->where('slug', $post_slug)->where('status', '0')->first();
+            //$latest_posts = Post::where('category_id', $category_id)->where('status', '0')->orderBy('created_at', 'DESC')->get()->take(5);
+            $latest_posts = Post::orderBy('created_at', 'DESC')->get()->take(5);
+
+            return view('frontend.post.view', compact('post', 'latest_posts'));
+        }
+        return redirect('/');
+    }
 }

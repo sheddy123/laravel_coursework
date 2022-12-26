@@ -9,13 +9,21 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Admin\PostFormRequest;
 use Illuminate\Support\Str;
 
-class PostController extends Controller
+class ArticleController extends Controller
 {
     //
 
     public function index()
     {
-        $posts = Post::all();
+        if (Auth::user()->role_as == '1') {
+            $posts = Post::all();
+            return view('admin.posts.index', compact('posts'));
+        }
+        $posts = Post::where('created_by', Auth::user()->id)->get();
+        if ($posts) {
+            return view('admin.posts.index', compact('posts'));
+        }
+        $posts = [];
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -30,13 +38,13 @@ class PostController extends Controller
         $data = $request->validated();
         //dd($data);
         $post = new Post;
+        $post->slug = Str::slug($data['slug']);
         $post->name = $data['name'];
         $post->category_id = $data['category_id'];
-        $post->slug = Str::slug($data['slug']);
-        $post->description = $data['description'];
         $post->yt_iframe = $data['yt_iframe'];
-        $post->meta_title = $data['meta_title'];
+        $post->description = $data['description'];
         $post->meta_description = $data['meta_description'];
+        $post->meta_title = $data['meta_title'];
         $post->meta_keyword = $data['meta_keyword'];
         $post->created_by = Auth::user()->id;
         $post->status = $request->status == true ? '1' : '0';
@@ -48,8 +56,8 @@ class PostController extends Controller
 
     public function edit_post($post_id)
     {
-        $categories = Category::where('status', '0')->get();
         $post = Post::find($post_id);
+        $categories = Category::where('status', '0')->get();
         return view('admin.posts.edit', compact('post', 'categories'));
     }
 
@@ -58,15 +66,15 @@ class PostController extends Controller
         $data = $request->validated();
         //dd($data);
         $post = Post::find($post_id);
-        $post->name = $data['name'];
         $post->category_id = $data['category_id'];
+        $post->name = $data['name'];
+        $post->meta_title = $data['meta_title'];
         $post->slug = Str::slug($data['slug']);
         $post->description = $data['description'];
         $post->yt_iframe = $data['yt_iframe'];
-        $post->meta_title = $data['meta_title'];
         $post->meta_description = $data['meta_description'];
-        $post->meta_keyword = $data['meta_keyword'];
         $post->created_by = Auth::user()->id;
+        $post->meta_keyword = $data['meta_keyword'];
         $post->status = $request->status == true ? '1' : '0';
 
         $post->update();

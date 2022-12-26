@@ -5,7 +5,7 @@
 
     <div class="z-10">
         <h1 class="text-6xl font-bold uppercase text-white">
-            Sheddy<span class="text-black">Blogging</span>
+            Sheddy<br/><span class="text-black">Blogging</span>
         </h1>
         <p class="text-2xl text-gray-200 font-bold my-4">
             Post latest articles and comment on articles
@@ -16,6 +16,16 @@
                     class="inline-block border-2 border-white text-white py-2 px-4 rounded-xl uppercase mt-2 hover:text-black hover:border-black">Sign
                     Up/Login to Post an Article</a>
             @endif
+            @if (Auth::check())
+                <a href="{{ url('admin/dashboard') }}"
+                    class="inline-block border-2 border-white text-white py-2 px-4 rounded-xl uppercase mt-2 hover:text-black hover:border-black text-sm">
+                    Go to dashboard</a>
+            @endif
+            
         </div>
     </div>
+    <br/>
 </section>
+
+
+

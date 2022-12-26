@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Category;
+use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\Admin\CategoryFormRequest;
+use Illuminate\Http\Request;
 
 
 
@@ -30,7 +32,7 @@ class CategoryController extends Controller
 
         $category = new Category;
         $category->name = $data['name'];
-        $category->slug = $data['slug'];
+        $category->slug = Str::slug($data['slug']);
         $category->description = $data['description'];
 
         if ($request->hasFile('image')) {
@@ -64,7 +66,7 @@ class CategoryController extends Controller
         $data = $request->validated();
         $category = Category::find($category_id);
         $category->name = $data['name'];
-        $category->slug = $data['slug'];
+        $category->slug = Str::slug($data['slug']);
         $category->description = $data['description'];
 
         if ($request->hasFile('image')) {
@@ -92,9 +94,10 @@ class CategoryController extends Controller
         return redirect('admin/category')->with('message', 'Category updated successfully');
     }
 
-    public function delete($category_id)
+    public function delete(Request $request)
     {
-        $category = Category::find($category_id);
+     //   $category = Category::find($category_id);
+        $category = Category::find($request->category_id);
 
         if ($category) {
 
@@ -102,9 +105,9 @@ class CategoryController extends Controller
             if (File::exists($destination)) {
                 File::delete($destination);
             }
-
+            $category->posts()->delete();
             $category->delete();
-            return redirect('admin/category')->with('message', 'Category deleted successfully');
+            return redirect('admin/category')->with('message', 'Category and post(s) deleted successfully');
         }
         return redirect('admin/category')->with('message', 'Category Not Found');
     }

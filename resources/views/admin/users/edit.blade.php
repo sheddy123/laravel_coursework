@@ -19,7 +19,7 @@
                     <p class="form-control">{{ $user->name }}</p>
                 </div>
                 <div class="mb-3">
-                    <label for="">Email Address</label>
+                    <label for="">Email Address</label> 
                     <p class="form-control">{{ $user->email }}</p>
                 </div>
                 <div class="mb-3">
@@ -31,7 +31,7 @@
                     @csrf
                     @method('PUT')
                     <div class="mb-3">
-                        <label for="role_as">Role</label>
+                        <label for="role_as">Role <span style="color:red">*</span></label>
                         <select name="role_as" class="form-control" id="role_as">
                             <option value="1"{{ $user->role_as == '1' ? 'selected' : '' }}>Admin</option>
                             <option value="0" {{ $user->role_as == '0' ? 'selected' : '' }}>User</option>

@@ -10,7 +10,9 @@
             @endif
             <div class="card-header">
                 <h4>View Users
-                    <a href="{{ url('admin/add-post') }}" class="btn btn-primary float-end">Add User</a>
+                    @if (Auth::user()->role_as == '1')
+                        <a href="{{ url('admin/add-post') }}" class="btn btn-primary float-end">Add User</a>
+                    @endif
                 </h4>
             </div>
             <div class="card-body">
@@ -21,19 +23,33 @@
                             <th>Username</th>
                             <th>Email</th>
                             <th>Role</th>
-                            <th>Action</th>
+                            @if (Auth::user()->role_as == '1')
+                                <th>Action</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($users as $user)
-                        <tr>
-                            <td>{{$user->id}}</td>
-                            <td>{{$user->name}}</td>
-                            <td>{{$user->email}}</td>
-                            <td>{{$user->role_as == '0' ? 'User' : 'Admin'}}</td>
-                            <td><a href="{{url('admin/user/'.$user->id)}}" class="btn btn-success">Edit</a>
-                            </td>
-                        </tr>
+                            @php
+                                $role = '';
+                                if ($user->role_as == '1') {
+                                    $role = 'Administrator';
+                                } elseif ($user->role_as == '0') {
+                                    $role = 'User';
+                                } else {
+                                    $role = 'Blogger';
+                                }
+                            @endphp
+                            <tr>
+                                <td>{{ $user->id }}</td>
+                                <td>{{ $user->name }}</td>
+                                <td>{{ $user->email }}</td>
+                                <td>{{ $role }}</td>
+                                @if (Auth::user()->role_as == '1')
+                                    <td><a href="{{ url('admin/user/' . $user->id) }}" class="btn btn-success">Edit</a>
+                                    </td>
+                                @endif
+                            </tr>
                         @endforeach
                     </tbody>
 

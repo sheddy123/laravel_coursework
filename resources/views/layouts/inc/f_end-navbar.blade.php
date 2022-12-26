@@ -1,5 +1,5 @@
-<nav class="flex justify-between items-center mb-4  px-24">
-    <a href="{{url('/')}}"><img class="w-24 mt-1" src="{{ asset('assets/images/skynet.png') }}" alt="" class="logo" /></a>
+<nav class="flex justify-between items-center mb-4 ">
+    <a href="{{url('/')}}"><img class="w-24 mt-1 md:px-4" src="{{ asset('assets/images/skynet.png') }}" alt="" class="logo" /></a>
     <ul class="flex space-x-6 mr-6 text-lg">
         <li>
             <a href="{{url('register')}}" class="hover:text-[#881337]">
