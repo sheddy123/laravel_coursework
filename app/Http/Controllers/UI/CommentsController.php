@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\UI;
 
 use App\Models\Post;
 use App\Models\User;

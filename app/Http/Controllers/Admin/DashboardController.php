@@ -21,6 +21,6 @@ class DashboardController extends Controller
 
         $users = $users + $bloggers;
 
-        return view('admin.dashboard', compact('categories', 'posts', 'users', 'admins'));
+        return view('authenticated_user.dashboard', compact('categories', 'posts', 'users', 'admins'));
     }
 }

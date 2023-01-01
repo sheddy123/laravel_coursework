@@ -12,6 +12,8 @@
     <meta name="keywords" content="@yield('meta_keyword')">
     <link href="{{ asset('assets/css/styles.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/custom.css') }}" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     {{-- Tailwind stylesheet --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
@@ -60,6 +62,16 @@
     <script src="{{ asset('assets/js/jquery-3.6.0.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/scripts.js') }}"></script>
+    <script src="{{ asset('assets/js/summernote-lite.min.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $("#my_summernote").summernote({
+                height: 250
+            });
+            $('.dropdown-toggle').dropdown();
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     @yield('scripts')
 </body>
 

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="mx-4">
-        <div class="bg-[#25313ef0] border border-gray-200 p-10 rounded max-w-lg mx-auto mt-24">
+        <div class="bg-[#932a4a] border border-gray-200 p-10 rounded max-w-lg mx-auto mt-24">
             <header class="text-center">
                 <h2 class="text-2xl text-white font-bold uppercase mb-1">
                     Register
@@ -71,7 +71,7 @@
                 <div class="mt-8">
                     <p class="text-white">
                         Already have an account?
-                        <a href="{{ url('login') }}" class="text-[#f4bfbf] hover:text-[#881337]">Login</a>
+                        <a href="{{ url('login') }}" class="text-[#f4bfbf] hover:text-[#f5e5cc]">Login</a>
                     </p>
                 </div>
             </form>

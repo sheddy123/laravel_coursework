@@ -5,12 +5,13 @@ use App\Services\SendEmailService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UI\UIController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\UI\CommentsController;
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Frontend\CommentsController;
-use App\Http\Controllers\Frontend\FrontendController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -35,8 +36,8 @@ Route::get('/',[App\Http\Controllers\HomeController::class, 'index']);
 // Route::get('/',[App\Http\Controllers\HomeController::class, function(){
 //     dd(app());
 // }]);
-Route::get('category/{category_id}',[FrontendController::class, 'viewCategoryPost']);
-Route::get('category/{category_id}/{post_slug}',[FrontendController::class, 'viewPost']);
+Route::get('category/{category_id}',[UIController::class, 'viewCategoryPost']);
+Route::get('category/{category_id}/{post_slug}',[UIController::class, 'viewPost']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 

@@ -17,20 +17,20 @@ class ArticleController extends Controller
     {
         if (Auth::user()->role_as == '1') {
             $posts = Post::all();
-            return view('admin.posts.index', compact('posts'));
+            return view('authenticated_user.posts.index', compact('posts'));
         }
         $posts = Post::where('created_by', Auth::user()->id)->get();
         if ($posts) {
-            return view('admin.posts.index', compact('posts'));
+            return view('authenticated_user.posts.index', compact('posts'));
         }
         $posts = [];
-        return view('admin.posts.index', compact('posts'));
+        return view('authenticated_user.posts.index', compact('posts'));
     }
 
     public function create()
     {
         $categories = Category::where('status', '0')->get();
-        return view('admin.posts.create', compact('categories'));
+        return view('authenticated_user.posts.create', compact('categories'));
     }
 
     public function create_post(PostFormRequest $request)
@@ -58,7 +58,7 @@ class ArticleController extends Controller
     {
         $post = Post::find($post_id);
         $categories = Category::where('status', '0')->get();
-        return view('admin.posts.edit', compact('post', 'categories'));
+        return view('authenticated_user.posts.edit', compact('post', 'categories'));
     }
 
     public function update(PostFormRequest $request, $post_id)

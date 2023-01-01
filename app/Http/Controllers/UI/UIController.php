@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Frontend;
+namespace App\Http\Controllers\UI;
 
 use App\Models\Post;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class FrontendController extends Controller
+class UIController extends Controller
 {
     //
     public function index()
     {
-        return view('frontend.index');
+        return view('ui.index');
     }
 
     public function viewCategoryPost($category_id)
@@ -21,7 +21,7 @@ class FrontendController extends Controller
         if ($category) {
             $post = Post::where('category_id', $category_id)->where('status', '0')->paginate(1);
 
-            return view('frontend.post.index', compact('post', 'category'));
+            return view('ui.post.index', compact('post', 'category'));
         }
         return redirect('/');
     }
@@ -34,7 +34,7 @@ class FrontendController extends Controller
             //$latest_posts = Post::where('category_id', $category_id)->where('status', '0')->orderBy('created_at', 'DESC')->get()->take(5);
             $latest_posts = Post::orderBy('created_at', 'DESC')->get()->take(5);
 
-            return view('frontend.post.view', compact('post', 'latest_posts'));
+            return view('ui.post.view', compact('post', 'latest_posts'));
         }
         return redirect('/');
     }
